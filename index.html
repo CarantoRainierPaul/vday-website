@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Heart Gallery Popup</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #ffe7e7;
+    padding: 40px;
+}
+/* Full-page sections */
+.page {
+    position: fixed;
+    inset: 0;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Visible page */
+.page.active {
+    display: flex;
+}
+
+/* Intro page styling */
+#page1 {
+    background: #f2f2f2;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#page1 h1 {
+    font-size: 2.3em;
+}
+
+button {
+    margin-top: 20px;
+    padding: 14px 35px;
+    font-size: 1em;
+    border: none;
+    background: #f85a55;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* Gallery page */
+#page2 {
+    background: #f2f2f2;
+    overflow: auto; /* ONLY if gallery content overflows */
+    justify-content: center;
+}
+
+/* Image inside heart */
+.official-photo {
+    width: 92%;
+    height: 92%;
+    object-fit: cover;
+    clip-path: inherit;
+}
+
+
+.pyramid-container {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    align-items: center; /* Center the rows */
+    padding-top: 20px;
+}
+
+.pyramid-row {
+    display: flex;
+    justify-content: center;
+    gap: 120px; /* Spacing between officials in a row */
+    margin-bottom: 30px; /* Spacing between rows */
+}
+
+.official-card {
+    text-align: center;
+    cursor: pointer;
+    width: 200px; /* Standardized card width */
+    transition: transform 0.3s ease;
+}
+
+.official-card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+/* Photo Styling */
+.official-photo {
+    width: 250px; /* Standardized photo size */
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px; 
+    border: 4px solid #85201c; /* Green border for distinction */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.official-photo:hover {
+    border-color: #FFD633; /* Darker green on hover */
+    transform: scale(1.05);
+}
+
+.official-name {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* Modal Card (Kept your existing modal styles but ensured they are integrated) */
+.profile-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.profile-content {
+    background: white;
+    padding: 25px;
+    width: 350px;
+    border-radius: 12px;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#page3 {
+    background: #ffe6eb;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#page3 h1 {
+    font-size: 2.4em;
+    color: #e63946;
+}
+
+.valentine-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.valentine-buttons button {
+    padding: 14px 35px;
+    font-size: 1em;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.yes-btn {
+    background: #ff4d6d;
+    color: white;
+}
+
+.no-btn {
+    background: #adb5bd;
+}
+</style>
+</head>
+
+<body>
+
+<section id="page1" class="page active">
+    <h1>Before I get to the point...</h1>
+    <p>This is something I made just for you 💛</p>
+    <button onclick="goToGallery()">Next →</button>
+</section>
+
+<section id="page2" class="page">
+
+<section id="officials" class="panel">
+  <div class="pyramid-container">
+    <div class="pyramid-row">
+        <div class="official-card">
+            <div class="heart" onclick="openProfile('official1')">
+                <img src="2023.jpg" class="official-photo">
+            </div>
+        </div>
+    </div>
+
+    <div class="pyramid-row">
+        <div class="official-card">
+            <div class="heart" onclick="openProfile('official2')">
+                <img src="2024.jpg" class="official-photo">
+            </div>
+        </div>
+
+        <div class="official-card">
+            <div class="heart" onclick="openProfile('official3')">
+                <img src="MID2025.JPG" class="official-photo">
+            </div>
+        </div>
+    </div>
+
+    <div class="pyramid-row">
+        <div class="official-card">
+            <div class="heart" onclick="openProfile('official4')">
+                <img src="2025.jpg" class="official-photo">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <div id="official1" class="profile-modal">
+            <div class="profile-content">
+                <span class="close" onclick="closeProfile('official1')">&times;</span>
+                <h2>Since Day One, the love that I have for you just keeps growing.</h2>
+            </div>
+        </div>
+
+        <div id="official2" class="profile-modal">
+            <div class="profile-content">
+                <span class="close" onclick="closeProfile('official2')">&times;</span>
+                <h2>We've been through so much together and it makes me more certain that there's no one else I'd rather have by my side. </h2>
+            </div>
+        </div>
+
+        <div id="official3" class="profile-modal">
+            <div class="profile-content">
+                <span class="close" onclick="closeProfile('official3')">&times;</span>
+                <h2>It will always be you, baby.</h2>
+            </div>
+        </div>
+
+        <div id="official4" class="profile-modal">
+            <div class="profile-content">
+                <span class="close" onclick="closeProfile('official4')">&times;</span>
+                <h2>I love you and I will always cherish our moments together. 4L <3</h2>
+            </div>
+        </div>
+
+        <h2>Please click every photo according to the timeframe of our pictures</h2>
+
+        <button style="margin:20px auto;" onclick="goToValentine()">
+        Next →
+    </button>
+    </div>
+
+
+
+
+
+    </section>
+    </section>
+
+      <section id="page3" class="page">
+    <h1>Will you be my Valentine’s Day date? 💖</h1>
+
+    <div class="valentine-buttons">
+        <button class="yes-btn" onclick="yesAnswer()">Yes 💕</button>
+        <button class="no-btn" onclick="playfulNo(this)">No 🙈</button>
+    </div>
+</section>
+
+
+        <script>
+
+            
+            
+function goToGallery() {
+    document.getElementById("page1").classList.remove("active");
+    document.getElementById("page2").classList.add("active");
+}
+
+function goToValentine() {
+    document.getElementById("page2").classList.remove("active");
+    document.getElementById("page3").classList.add("active");
+}
+
+function playfulNo(btn) {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function yesAnswer() {
+    alert("Yay! See you this Valentine's Day!");
+}
+
+
+
+
+              function openProfile(id) {
+        document.getElementById(id).style.display = "flex";
+    }
+
+    function closeProfile(id) {
+        document.getElementById(id).style.display = "none";
+    }
+        </script>
+    
+
+</body>
+</html>
