@@ -172,6 +172,22 @@ button {
 .no-btn {
     background: #adb5bd;
 }
+
+    #celebration-message {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffebee;
+    border: 2px solid #ff4081;
+    border-radius: 15px;
+    text-align: center;
+    color: #d81b60;
+    animation: fadeIn 1s; /* Subtle fade-in effect */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 </style>
 </head>
 
@@ -268,6 +284,11 @@ button {
         <button class="yes-btn" onclick="yesAnswer()">Yes 💕</button>
         <button class="no-btn" onclick="playfulNo(this)">No 🙈</button>
     </div>
+
+          <div id="celebration-message" style="display: none;">
+    <h2>Yay! I knew you'd say yes!</h2>
+    <p>See you on Feb. 14, Baby!</p>
+</div>
 </section>
 
 
@@ -292,9 +313,10 @@ function playfulNo(btn) {
 }
 
 function yesAnswer() {
-    alert("Yay! I can't wait to see you this Feb. 14 baby!");
+    // Show the hidden message
+    const message = document.getElementById('celebration-message');
+    message.style.display = 'block';
 }
-
 
 
 
@@ -310,6 +332,7 @@ function yesAnswer() {
 
 </body>
 </html>
+
 
 
 
